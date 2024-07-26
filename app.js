@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/public'));
 // rutas web
 
 app.use("/", require("./router/rutasweb"));
+app.use("/mascotas", require("./router/mascotas"));
 
 //direccionar a vista 404 cuando se presente un error de redireccionamiento
 
