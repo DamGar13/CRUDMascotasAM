@@ -2,6 +2,18 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+/* conexion a la base de datos mongodb cloud */
+
+const mongoose = require('mongoose');
+const usuario = 'damiang_13';
+const password = 'P5Nt539aeDm6yAZZ';
+const dbName = 'mascotas';
+
+const uri = `mongodb+srv://${usuario}:${password}@cluster0.tm9afqm.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0`
+mongoose.connect(uri)
+  .then(() => console.log("Conectado a MongoDB"))
+  .catch(e => console.log("error de conexion a MongoDB", e))
+
 //Establecemos el motor de plantillas
 
 app.set('view engine', 'ejs');
