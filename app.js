@@ -7,9 +7,10 @@ const port = 3000
 const mongoose = require('mongoose');
 const usuario = 'damiang_13';
 const password = 'P5Nt539aeDm6yAZZ';
-const dbName = 'mascotas';
+const dbName = 'veterinaria';
 
 const uri = `mongodb+srv://${usuario}:${password}@cluster0.tm9afqm.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0`
+
 mongoose.connect(uri)
   .then(() => console.log("Conectado a MongoDB"))
   .catch(e => console.log("error de conexion a MongoDB", e))
