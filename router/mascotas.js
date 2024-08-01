@@ -11,12 +11,24 @@ router.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    /*res.render('mascotas', {arrayMascotas: [
-        {id: 'mas001', nombre: 'Marly', descripcion: 'Gato criollo'},
-        {id: 'mas002', nombre: 'Manchas', descripcion: 'Gato de raza'},
-        {id: 'mas003', nombre: 'Risas', descripcion: 'Perro criollo'},
-        {id: 'mas004', nombre: 'Axel', descripcion: 'Perro criollo'},
-    ]});*/
+})
+
+// render para pagina 'crear nueva mascota'
+
+router.get('/crear', (req, res) => {
+    res.render('crear');
+})
+
+// router para recibir datos del formulario crear
+
+router.post('/', async (req, res) => {
+    const body = req.body;
+    try{
+        await mascota.create(body)
+        res.redirect('/mascotas')
+    }catch(error){
+        console.log("error", error)
+    }
 })
 
 module.exports = router;
