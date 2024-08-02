@@ -31,4 +31,47 @@ router.post('/', async (req, res) => {
     }
 })
 
+// router para consultar un dato del formulario
+
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    try{
+        const mascotaDB = await mascota.findOne({_id: id})
+        console.log(mascotaDB)
+        res.render('detalle',{
+            mascota:mascotaDB,
+            error: false
+        })
+    }catch(error){
+        console.log("error", error)
+        res.render('detalle',{
+            error: true,
+            mensaje: 'no se encontró ningún registro que conincida con el id'
+        })
+    }
+})
+
+// router para borrar un dato del formulario
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    try{
+        const mascotaDB = await mascota.findByIdAndDelete({_id: id})
+        if (!mascotaDB) {
+            res.json({
+                estado: false,
+                mensaje: "No fue posible elimiar el registro"
+            })
+        } else {
+            res.json({
+                estado: true,
+                mensaje: "Registro eliminado"
+                })
+        }
+    }catch(error){
+        console.log("error", error)
+        
+    }
+})
+
 module.exports = router;
