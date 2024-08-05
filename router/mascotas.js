@@ -74,4 +74,27 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+//router para actualizar/modificar un registro
+
+router.put('/:id', async(req, res)=>{
+    const id = req.params.id;
+    const body = req.body;
+    console.log(body);
+    try {
+        const mascotaDB = await mascota.findByIdAndUpdate(
+            id, body, {useFindAndModify: false}
+        )
+        res.json({
+            estado: true,
+            mensaje: 'Mascota editada'
+        })
+    } catch (error) {
+        console.log(error);
+        res.json({
+            estado: false,
+            mensaje: 'Edicion fallida'
+        })
+    }
+});
+
 module.exports = router;
