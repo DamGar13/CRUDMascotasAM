@@ -1,0 +1,89 @@
+<%- include('template/header', {tituloweb: "Crear Mascota"}); %>
+
+    <div class="container">
+        <h1>Detalle de Servicio</h1>
+        <% if (error) { %>
+            <%= mensaje %>
+            <a href="/servicios" class="btn btn-dark my-2">volver</a>
+        <% } %>
+        <% if (!error) { %>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Servicio</th>
+                    <th scope="col">Descripcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><%= servicio.id %></th>
+                        <td><%= servicio.servicio %></td>
+                        <td><%= servicio.descripcion %></td>
+                    </tr>   
+                </tbody>
+            </table>
+            <form method="post" id="formEditar">
+                <input type="text" class="form-control my-2" name="servicio" id="servicio" value="<%= servicio.servicio %>">
+                <input type="text" class="form-control my-2" name="descripcion" id="descripcion" value="<%= servicio.descripcion %>">
+                <input type="hidden" name="id" id="id" value="<%= servicio.id %>">
+                <div class="container text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-2">
+                            <button class="btn btn-warning my-2" type="submit">Actualizar</button>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger my-2" id="btnEliminar" data-id="<%= servicio.id %>">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <% } %>
+    </div>
+    <script>
+        const btnEliminar = document.querySelector('#btnEliminar');
+        btnEliminar.addEventListener('click', async()=>{
+            const id = btnEliminar.dataset.id;
+            try {
+                const data = await fetch(`/servicios/${id}`,{method: 'delete'});
+                const respuesta = await data.json();
+                console.log(respuesta);
+                if(respuesta.estado){
+                    window.location.href = '/servicios';
+                } else {
+                    console.log(respuesta);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+
+        const formEditar = document.querySelector('#formEditar');
+        formEditar.addEventListener('submit', async(e) =>{
+            e.preventDefault();
+            let servicio = document.querySelector('#servicio').value;
+            let descripcion = document.querySelector('#descripcion').value;
+            let id = document.querySelector('#id').value;
+            try {
+                // creacion del archivo .json para enviar a la base de datos
+                const data = await fetch(`/servicios/${id}`,{
+                    method: 'put',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    // contenido del archivo.json
+                    body: JSON.stringify({servicio, descripcion})
+                });
+                const respuesta = await data.json();
+                if(respuesta.estado){
+                    window.location.href = '/servicios'
+                } else {
+                    console.log(respuesta)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    </script>
+
+<%- include('template/footer'); %>

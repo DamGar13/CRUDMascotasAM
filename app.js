@@ -25,6 +25,9 @@ mongoose.connect(uri)
 //Establecemos el motor de plantillas
 
 app.set('view engine', 'ejs');
+
+//Establecemos la ruta donde se encuentran las vistas
+
 app.set('views', __dirname + '/views');
 
 //middleware para contenido estatico
@@ -35,6 +38,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use("/", require("./router/rutasweb"));
 app.use("/mascotas", require("./router/mascotas"));
+app.use("/servicios", require("./router/servicios"));
 
 //direccionar a vista 404 cuando se presente un error de redireccionamiento
 
