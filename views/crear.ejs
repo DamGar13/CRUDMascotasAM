@@ -1,16 +1,43 @@
-<%- include('template/header', {tituloweb: "Crear Mascota"}); %>
-
-    <div class="container">
-        <h1>Nueva Mascota "Pendiente 'Bootstrap/Modal'"</h1>
-        <form action="/mascotas" method="post">
-            <label for="">Nombre</label>
-            <input type="text" placeholder="Nombre de la mascota" name="nombre" id="nombre" class="form-control my-2">
-            <label for="">Descripcion</label>
-            <input type="text" placeholder="Descripcion de la mascota" name="descripcion" id="descripcion" class="form-control my-2">
-            <div class="d-grid gap-2">
-                <button class="btn btn-success my-2" type="submit">Agregar</button>
-            </div>
-        </form>
-    </div>
-
-<%- include('template/footer'); %>
+<%- include('template/header', {tituloweb: "Crear Mascota" }); %>
+    <%- include('template/aside'); %>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>MASCOTAS</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                                <li class="breadcrumb-item"><a href="/mascotas">Mascotas</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Creacion de Mascota</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <h1>Nueva Mascota "Pendiente 'Bootstrap/Modal'"</h1>
+                            <form action="/mascotas" method="post">
+                                <label for="">Nombre</label>
+                                <input type="text" placeholder="Nombre de la mascota" name="nombre" id="nombre"
+                                    class="form-control my-2">
+                                <label for="">Descripcion</label>
+                                <input type="text" placeholder="Descripcion de la mascota" name="descripcion"
+                                    id="descripcion" class="form-control my-2">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success my-2" type="submit">Agregar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <%- include('template/footer'); %>
